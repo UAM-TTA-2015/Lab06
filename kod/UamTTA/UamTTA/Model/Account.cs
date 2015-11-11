@@ -2,6 +2,11 @@
 {
     public class Account : ModelBase
     {
+        public Account()
+        {
+            
+        }
+
         public Account(string name, decimal balance, Account clearingAccount = null, string relatedBankAccount = null,
             decimal? expectedIncomes = null, decimal? targetBalance = null)
         {
@@ -14,19 +19,19 @@
             TargetBalance = targetBalance;
         }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public string RelatedBankAccount { get; }
+        public string RelatedBankAccount { get; set; }
 
-        public decimal Balance { get; }
+        public decimal Balance { get; set; }
 
-        public decimal? ExpectedIncomes { get; }
+        public decimal? ExpectedIncomes { get; set; }
 
-        public decimal? TargetBalance { get; }
+        public decimal? TargetBalance { get; set; }
 
-        public bool RequiresClearing { get; }
+        public bool RequiresClearing { get; set; }
 
-        public Account ClearingAccount { get; }
+        public Account ClearingAccount { get; set; }
 
         public override string ToString()
         {
