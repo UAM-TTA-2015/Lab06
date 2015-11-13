@@ -29,7 +29,7 @@ namespace UamTTA
                     throw new ArgumentOutOfRangeException();
             }
 
-            return new Budget(startDate, endDate);
+            return template.DefaultName != null ? new Budget(startDate, endDate, template.DefaultName) : new Budget(startDate, endDate);
         }
 
         private static DateTime AddWeek(DateTime startDate)

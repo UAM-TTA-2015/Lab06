@@ -121,5 +121,28 @@ namespace UamTTA.Tests
             Assert.That(budget.ValidFrom, Is.EqualTo(expectedStartDate));
             Assert.That(budget.ValidTo, Is.EqualTo(expectedEndDate));
         }
+
+        [Test]
+        public void Does_Budget_Have_Proper_Default_Budget_Name_When_One_Is_Not_Supplied()
+        {
+            var template = new BudgetTemplate(Duration.Weekly);
+
+            Budget budget = _budgetFactory.CreateBudget(template, new DateTime(2015, 6, 9));
+
+            Assert.That(budget, Is.Not.Null);
+            Assert.That(budget.Name, Is.EqualTo("Default Budget"));
+        }
+
+        [Test]
+        public void Does_Budget_Have_Proper_Default_Name_When_One_Is_Supplied()
+        {
+            String budget_name = "Weekly Budget";
+            var template = new BudgetTemplate(Duration.Weekly, budget_name);
+
+            Budget budget = _budgetFactory.CreateBudget(template, new DateTime(2015, 6, 9));
+
+            Assert.That(budget, Is.Not.Null);
+            Assert.That(budget.Name, Is.EqualTo(budget_name));
+        }
     }
 }
