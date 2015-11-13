@@ -77,8 +77,8 @@ namespace UamTTA.Tests
             get
             {
                 yield return new[] { new DateTime(2015, 10, 2), new DateTime(2016, 1, 1) };
-                yield return new[] { new DateTime(2015, 10, 31), new DateTime(2015, 10, 30) };
-                yield return new[] { new DateTime(2016, 1, 31), new DateTime(2016, 4, 29) };
+                yield return new[] { new DateTime(2015, 10, 31), new DateTime(2016, 1, 30) };
+                yield return new[] { new DateTime(2016, 1, 31), new DateTime(2016, 4, 30) };
                 yield return new[] { new DateTime(2015, 1, 31), new DateTime(2015, 4, 30) };
                 yield return new[] { new DateTime(2015, 12, 15), new DateTime(2016, 3, 14) };
                 yield return new[] { new DateTime(2015, 7, 31), new DateTime(2015, 10, 30) };
@@ -102,9 +102,10 @@ namespace UamTTA.Tests
         {
             get
             {
-                yield return new[] { new DateTime(2015, 10, 2), new DateTime(2016, 10, 2) };
-                yield return new[] { new DateTime(2015, 10, 31), new DateTime(2016, 10, 31) };
+                yield return new[] { new DateTime(2015, 10, 2), new DateTime(2016, 10, 1) };
+                yield return new[] { new DateTime(2015, 10, 31), new DateTime(2016, 10, 30) };
                 yield return new[] { new DateTime(2016, 2, 29), new DateTime(2017, 2, 28) };
+                yield return new[] { new DateTime(2019, 4, 28), new DateTime(2020, 4, 27) };
             }
         }
 
