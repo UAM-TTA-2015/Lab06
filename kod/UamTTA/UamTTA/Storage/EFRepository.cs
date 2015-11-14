@@ -35,6 +35,18 @@ namespace UamTTA.Storage
             throw new NotImplementedException();
         }
 
+        //public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        //{
+        //    using (var context = _contextFactory())
+        //    {
+        //        foreach (int id in ids)
+        //        {
+        //            if (context.Set<T>().Contains<T>())
+        //                yield return FindById(id);
+        //        }
+        //    }
+        //}
+
         public T Persist(T item)
         {
             using (var context = _contextFactory())
@@ -68,5 +80,22 @@ namespace UamTTA.Storage
         {
             throw new NotImplementedException();
         }
+
+        //public IEnumerable<T> Take(int count)
+        //{
+        //    using (var context = _contextFactory())
+        //    {
+        //        if (context.Set<T>().ToList().Count >= count)
+        //        {
+        //            for (int i = 0; i < count; i++)
+        //            {
+        //                yield return FindById(i);
+        //            }
+        //        } else
+        //        {
+        //            throw new ArgumentException();
+        //        }
+        //    }
+        //}
     }
 }
