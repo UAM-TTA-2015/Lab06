@@ -47,5 +47,15 @@ namespace UamTTA.Storage
                 _storage.Remove(item.Id.Value);
             }
         }
+
+        public IEnumerable<T> Take(int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

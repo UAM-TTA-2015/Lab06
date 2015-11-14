@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 
@@ -29,6 +30,11 @@ namespace UamTTA.Storage
             }
         }
 
+        public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        {
+            throw new NotImplementedException();
+        }
+
         public T Persist(T item)
         {
             using (var context = _contextFactory())
@@ -56,6 +62,11 @@ namespace UamTTA.Storage
                 context.Set<T>().Remove(context.Set<T>().Single(x => x.Id == item.Id));
                 context.SaveChanges();
             }
+        }
+
+        public IEnumerable<T> Take(int count)
+        {
+            throw new NotImplementedException();
         }
     }
 }
