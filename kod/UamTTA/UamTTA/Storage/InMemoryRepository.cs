@@ -67,7 +67,14 @@ namespace UamTTA.Storage
 
         public IEnumerable<T> GetByIds(IEnumerable<int> ids)
         {
-            throw new NotImplementedException();
+            foreach (int id in ids)
+            {
+                var item = FindById(id);
+                if (item != null)
+                {
+                    yield return item;
+                }
+            }
         }
     }
 }

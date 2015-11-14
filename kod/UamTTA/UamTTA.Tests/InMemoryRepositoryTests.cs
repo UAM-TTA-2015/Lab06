@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using UamTTA.Storage;
 using System;
+using System.Collections.Generic;
 
 namespace UamTTA.Tests
 {
@@ -151,7 +152,7 @@ namespace UamTTA.Tests
             //Arrange
             int count = 5;
 
-            //Act
+            //Act   
             ArgumentException result = Assert.Throws<ArgumentException>(delegate { _sut.Take(count); });
 
             //Assert
@@ -211,7 +212,7 @@ namespace UamTTA.Tests
 
             var result = _sut.GetByIds(ids);
 
-            Assert.That(result, Is.Null);
+            Assert.That(result, Is.Empty);
         }
 
         [Test]
@@ -219,19 +220,23 @@ namespace UamTTA.Tests
         {
             var model1 = new TestModel { Id = null, SomeIntAttribute = 10, SomeStringAttribute = "Bla" };
             var model2 = new TestModel { Id = null, SomeIntAttribute = 12, SomeStringAttribute = "BlaBla" };
+            var model3 = new TestModel { Id = 15, SomeIntAttribute = 14, SomeStringAttribute = "BlaBlaCar" };
 
             var persisted1 = _sut.Persist(model1);
             var persisted2 = _sut.Persist(model2);
+            var persisted3 = _sut.Persist(model3);
 
-            int[] ids = new int[] { persisted1.Id.Value, persisted2.Id.Value };
+            int[] ids = new int[] { persisted1.Id.Value, persisted2.Id.Value, persisted3.Id.Value };
 
             var result = _sut.GetByIds(ids);
 
             foreach (TestModel account in result)
             {
                 Assert.That(account, Is.Not.Null);
-                Assert.That(account.SomeStringAttribute, (account.Id.Value == 0) ? Is.EqualTo("Bla") : Is.EqualTo("BlaBla"));
             }
+
+            result.Contains(persisted2);
+            CollectionAssert.AllItemsAreUnique(result);
         }
 
         [Test]
