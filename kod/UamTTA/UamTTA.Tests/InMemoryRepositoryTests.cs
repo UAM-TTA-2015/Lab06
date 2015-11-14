@@ -151,15 +151,18 @@ namespace UamTTA.Tests
             //Arrange
             int count = 5;
 
-            //Act & Assert
-            Assert.Throws<ArgumentException>(() => _sut.Take(count));
+            //Act
+            ArgumentException result = Assert.Throws<ArgumentException>(delegate { _sut.Take(count); });
+
+            //Assert
+            Assert.That(result.Message, Is.EqualTo("Empty/NotEnoughtObjects"));
         }
 
         [Test]
         public void Take_Should_Throw_Exception_When_There_Is_Less_Objects_Than_Count()
-        {
+        { 
             //Arrange
-            int count = 5;
+            int count = 3;
 
             var model1 = new TestModel { Id = null, SomeIntAttribute = 10, SomeStringAttribute = "Bla" };
             var model2 = new TestModel { Id = null, SomeIntAttribute = 12, SomeStringAttribute = "BlaBla" };
@@ -167,8 +170,11 @@ namespace UamTTA.Tests
             _sut.Persist(model1);
             _sut.Persist(model2);
 
-            //Act & Assert
-            Assert.Throws<ArgumentException>(() => _sut.Take(count));
+            //Act
+            ArgumentException result = Assert.Throws<ArgumentException>(delegate { _sut.Take(count); });
+
+            //Assert
+            Assert.That(result.Message, Is.EqualTo("Empty/NotEnoughtObjects"));
         }
 
         [Test]

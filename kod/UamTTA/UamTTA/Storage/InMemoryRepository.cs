@@ -50,7 +50,19 @@ namespace UamTTA.Storage
 
         public IEnumerable<T> Take(int count)
         {
-            throw new NotImplementedException();
+           if (_storage.Count < count)
+            {
+                throw new ArgumentException("Empty/NotEnoughtObjects");
+            } else
+            {
+                List<T> list = new List<T>();
+                for (int i = 1; i <= count; i++)
+                {
+                    list.Add(FindById(i));
+                }
+
+                return list;
+            }
         }
 
         public IEnumerable<T> GetByIds(IEnumerable<int> ids)
