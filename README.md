@@ -16,4 +16,7 @@ Zobaczymy jak sobie poradzić z coraz bardziej skomplikowanym kodem i zależnoś
 * Kod: [UamTTA](kod/UamTTA)
 
 ### Pomocne zasoby
+Do kontaktu z bazą danych będziemy używać Entity Framework w wersji 6.x. Materiały o EF:
 * [Wprowadzenie do EF6 Code First](https://msdn.microsoft.com/en-us/data/jj193542.aspx?f=255&MSPPError=-2147217396)
+* [Materiały video na Channel9](https://channel9.msdn.com/Search?term=entity%20framework#ch9Search&lang-en=en)
+* [Strona główna EF6](http://entityframework.codeplex.com/)
