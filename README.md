@@ -14,3 +14,6 @@ Zobaczymy jak sobie poradzić z coraz bardziej skomplikowanym kodem i zależnoś
 * Funkcje do zaimplementowania: [Zadania](Zadania.md)
 * Zadanie domowe: [Zadanie domowe](ZadanieDomowe.md)
 * Kod: [UamTTA](kod/UamTTA)
+
+### Pomocne zasoby
+* [Wprowadzenie do EF6 Code First](https://msdn.microsoft.com/en-us/data/jj193542.aspx?f=255&MSPPError=-2147217396)
