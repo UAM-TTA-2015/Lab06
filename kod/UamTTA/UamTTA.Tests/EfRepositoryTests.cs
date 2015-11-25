@@ -4,6 +4,7 @@ using UamTTA.Storage;
 
 namespace UamTTA.Tests
 {
+    [Ignore]
     [TestFixture]
     public class EfRepositoryTests
     {
