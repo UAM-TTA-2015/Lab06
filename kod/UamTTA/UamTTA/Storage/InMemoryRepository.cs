@@ -47,5 +47,22 @@ namespace UamTTA.Storage
                 _storage.Remove(item.Id.Value);
             }
         }
+
+        public IEnumerable<T> Take(int count)
+        {
+            return _storage.Values;
+        }
+
+        public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        {
+            foreach (int id in ids)
+            {
+                var item = FindById(id);
+                if (item != null)
+                {
+                    yield return item;
+                }
+            }
+        }
     }
 }
