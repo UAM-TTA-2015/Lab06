@@ -50,7 +50,8 @@ namespace UamTTA.Storage
 
         public IEnumerable<T> Take(int count)
         {
-           if (_storage.Count < count)
+            Console.WriteLine("Take(int count); from InMemoryRepo");
+            if (_storage.Count < count)
             {
                 throw new ArgumentException("Empty/NotEnoughtObjects");
             } else

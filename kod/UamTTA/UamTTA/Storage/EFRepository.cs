@@ -32,20 +32,16 @@ namespace UamTTA.Storage
 
         public IEnumerable<T> GetByIds(IEnumerable<int> ids)
         {
-            throw new NotImplementedException();
+            using (var context = _contextFactory())
+            {
+                foreach (int id in ids)
+                {
+                    var result = FindById(id);
+                    if (result != null)
+                        yield return FindById(id);
+                }
+            }
         }
-
-        //public IEnumerable<T> GetByIds(IEnumerable<int> ids)
-        //{
-        //    using (var context = _contextFactory())
-        //    {
-        //        foreach (int id in ids)
-        //        {
-        //            if (context.Set<T>().Contains<T>())
-        //                yield return FindById(id);
-        //        }
-        //    }
-        //}
 
         public T Persist(T item)
         {
@@ -78,24 +74,23 @@ namespace UamTTA.Storage
 
         public IEnumerable<T> Take(int count)
         {
-            throw new NotImplementedException();
-        }
+            //Console.WriteLine("Takt(int count); from EFRepo");
+            using (var context = _contextFactory())
+            {
+                //Console.WriteLine("Mam: " + GetAll().Count() + ", a oczekuję: " + count);
 
-        //public IEnumerable<T> Take(int count)
-        //{
-        //    using (var context = _contextFactory())
-        //    {
-        //        if (context.Set<T>().ToList().Count >= count)
-        //        {
-        //            for (int i = 0; i < count; i++)
-        //            {
-        //                yield return FindById(i);
-        //            }
-        //        } else
-        //        {
-        //            throw new ArgumentException();
-        //        }
-        //    }
-        //}
+                if (GetAll().Count() < count)
+                {
+                    throw new ArgumentException();
+                }
+                else
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        yield return FindById(i);
+                    }
+                }
+            }
+        }
     }
 }
