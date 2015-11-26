@@ -1,5 +1,5 @@
 # Tworzenie testowalnych aplikacji
-## Laboratorium #6 - Testowanie jednostkowe - zaawansowane tematy część 1
+## Laboratorium #6 - Testowanie jednostkowe - zaawansowane tematy część pierwsza
 
 ### Prowadzący zajęcia
 Bartosz Sokół, Nikodem Rafalski
