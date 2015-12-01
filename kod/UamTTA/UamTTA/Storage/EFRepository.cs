@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 
@@ -26,6 +27,18 @@ namespace UamTTA.Storage
             using (var context = _contextFactory())
             {
                 return context.Set<T>().AsEnumerable().ToList();
+            }
+        }
+
+        public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        {
+            foreach (int id in ids)
+            {
+                var item = FindById(id);
+                if (item != null)
+                {
+                    yield return item;
+                }
             }
         }
 
@@ -57,5 +70,18 @@ namespace UamTTA.Storage
                 context.SaveChanges();
             }
         }
+
+       public IEnumerable<T> Take(int count)
+        {
+            using (var context = _contextFactory())
+            {
+                if (count <= context.Set<T>().Count())
+                    return context.Set<T>().Take(count).ToList();
+                else
+                    throw new ArgumentException("Repozytorium ma mniej niż", "count");
+            }
+            
+        }
+        
     }
 }

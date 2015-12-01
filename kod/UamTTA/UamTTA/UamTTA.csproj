@@ -54,6 +54,10 @@
     <Compile Include="Migrations\201511112210260_Init.Designer.cs">
       <DependentUpon>201511112210260_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511251915088_AddUrl.cs" />
+    <Compile Include="Migrations\201511251915088_AddUrl.designer.cs">
+      <DependentUpon>201511251915088_AddUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Budget.cs" />
@@ -63,6 +67,7 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Transfer.cs" />
     <Compile Include="Storage\EFRepository.cs" />
@@ -78,6 +83,10 @@
     <EmbeddedResource Include="Migrations\201511112210260_Init.resx">
       <DependentUpon>201511112210260_Init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511251915088_AddUrl.resx">
+      <DependentUpon>201511251915088_AddUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511251920177_Transaction.cs.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

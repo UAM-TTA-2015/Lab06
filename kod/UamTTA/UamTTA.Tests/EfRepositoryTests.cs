@@ -127,5 +127,19 @@ namespace UamTTA.Tests
             Assert.That(result.Count(), Is.EqualTo(2));
             CollectionAssert.AllItemsAreUnique(result);
         }
+
+        [Test]
+        public void Take_Returns_Count_Items()
+        {
+            var model1 = new Account { Id = null, Balance = 10, Name = "Bla" };
+            var model2 = new Account { Id = null, Balance = 12, Name = "BlaBla" };
+
+            _sut.Persist(model1);
+            _sut.Persist(model2);
+            var result = _sut.Take(1);
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+            CollectionAssert.AllItemsAreUnique(result);
+        }
     }
 }
