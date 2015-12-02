@@ -5,7 +5,7 @@ namespace UamTTA
 {
     public class BudgetTemplate : ModelBase
     {
-        public BudgetTemplate(Duration defaultDuration, string defaultName, IEnumerable<Account> defaultAccounts = null)
+        public BudgetTemplate(Duration defaultDuration, string defaultName = null, IEnumerable<Account> defaultAccounts = null)
         {
             DefaultAccounts = defaultAccounts ?? Enumerable.Empty<Account>();
             DefaultDuration = defaultDuration;

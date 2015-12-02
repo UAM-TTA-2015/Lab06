@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using UamTTA.Storage;
+using System;
+using System.Collections.Generic;
 
 namespace UamTTA.Tests
 {
@@ -142,6 +144,119 @@ namespace UamTTA.Tests
 
             Assert.That(result.Count(), Is.EqualTo(2));
             CollectionAssert.AllItemsAreUnique(result);
+        }
+
+        [Test]
+        public void Take_Should_Throw_Exception_When_Repository_Is_Empty()
+        {
+            //Arrange
+            int count = 5;
+
+            //Act   
+            ArgumentException result = Assert.Throws<ArgumentException>(delegate { _sut.Take(count); });
+
+            //Assert
+            Assert.That(result.Message, Is.EqualTo("Empty/NotEnoughtObjects"));
+        }
+
+        [Test]
+        public void Take_Should_Throw_Exception_When_There_Is_Less_Objects_Than_Count()
+        { 
+            //Arrange
+            int count = 3;
+
+            var model1 = new TestModel { Id = null, SomeIntAttribute = 10, SomeStringAttribute = "Bla" };
+            var model2 = new TestModel { Id = null, SomeIntAttribute = 12, SomeStringAttribute = "BlaBla" };
+
+            _sut.Persist(model1);
+            _sut.Persist(model2);
+
+            //Act
+            ArgumentException result = Assert.Throws<ArgumentException>(delegate { _sut.Take(count); });
+
+            //Assert
+            Assert.That(result.Message, Is.EqualTo("Empty/NotEnoughtObjects"));
+        }
+
+        [Test]
+        public void Take_Should_Return_First_Count_Elements_From_Repository()
+        {
+            //Arrange
+            int count = 2;
+
+            var model1 = new TestModel { Id = null, SomeIntAttribute = 10, SomeStringAttribute = "Bla" };
+            var model2 = new TestModel { Id = null, SomeIntAttribute = 12, SomeStringAttribute = "BlaBla" };
+            var model3 = new TestModel { Id = null, SomeIntAttribute = 40, SomeStringAttribute = "BlaBlaBla" };
+
+            _sut.Persist(model1);
+            _sut.Persist(model2);
+            _sut.Persist(model3);
+
+            //Act
+            var result = _sut.Take(count);
+
+            //Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count(), Is.EqualTo(count));
+
+            foreach (var account in result)
+            {
+                Assert.That(account, Is.Not.Null);
+            }
+        }
+
+        [Test]
+        public void GetByIds_Should_Return_Null_When_There_Is_No_Objects_From_Given_Id_Set()
+        {
+            int[] ids = new int[] { 1, 2, 3 };
+
+            var result = _sut.GetByIds(ids);
+
+            Assert.That(result, Is.Empty);
+        }
+
+        [Test]
+        public void GetByIds_Should_Return_All_Objects_From_Given_Id_Set()
+        {
+            var model1 = new TestModel { Id = null, SomeIntAttribute = 10, SomeStringAttribute = "Bla" };
+            var model2 = new TestModel { Id = null, SomeIntAttribute = 12, SomeStringAttribute = "BlaBla" };
+            var model3 = new TestModel { Id = 15, SomeIntAttribute = 14, SomeStringAttribute = "BlaBlaCar" };
+
+            var persisted1 = _sut.Persist(model1);
+            var persisted2 = _sut.Persist(model2);
+            var persisted3 = _sut.Persist(model3);
+
+            int[] ids = new int[] { persisted1.Id.Value, persisted2.Id.Value, persisted3.Id.Value };
+
+            var result = _sut.GetByIds(ids);
+
+            foreach (TestModel account in result)
+            {
+                Assert.That(account, Is.Not.Null);
+            }
+
+            result.Contains(persisted2);
+            CollectionAssert.AllItemsAreUnique(result);
+        }
+
+        [Test]
+        public void GetByIds_Should_Ommit_When_There_Is_No_Object_With_Given_Id()
+        {
+            var model1 = new TestModel { Id = null, SomeIntAttribute = 10, SomeStringAttribute = "Bla" };
+            var model2 = new TestModel { Id = null, SomeIntAttribute = 12, SomeStringAttribute = "BlaBla" };
+
+            var persisted1 = _sut.Persist(model1);
+            var persisted2 = _sut.Persist(model2);
+
+            int[] ids = new int[] { persisted1.Id.Value, 500, 700, persisted2.Id.Value };
+
+            var result = _sut.GetByIds(ids);
+
+            Assert.That(result.Count(), Is.EqualTo(2));
+            foreach (TestModel account in result)
+            {
+                Assert.That(account, Is.Not.Null);
+            }
         }
     }
 }

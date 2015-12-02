@@ -11,5 +11,9 @@ namespace UamTTA.Storage
         T Persist(T item);
 
         void Remove(T item);
+
+        IEnumerable<T> Take(int count);
+
+        IEnumerable<T> GetByIds(IEnumerable<int> ids);
     }
 }

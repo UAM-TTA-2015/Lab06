@@ -7,12 +7,13 @@ namespace UamTTA
     public class Budget : ModelBase
     {
         public Budget(
-            DateTime validFrom, DateTime validTo,
+            DateTime validFrom, DateTime validTo, String name = "Default Budget",
             IEnumerable<Transfer> operations = null, IEnumerable<Account> relatedAccounts = null,
             Account clearingAccount = null)
         {
             ValidFrom = validFrom;
             ValidTo = validTo;
+            Name = name;
             Operations = operations ?? Enumerable.Empty<Transfer>();
             RelatedAccounts = relatedAccounts ?? Enumerable.Empty<Account>();
         }
@@ -20,6 +21,8 @@ namespace UamTTA
         public DateTime ValidFrom { get; }
 
         public DateTime ValidTo { get; }
+
+        public String Name { get; }
 
         public IEnumerable<Account> RelatedAccounts { get; }
 

@@ -47,5 +47,35 @@ namespace UamTTA.Storage
                 _storage.Remove(item.Id.Value);
             }
         }
+
+        public IEnumerable<T> Take(int count)
+        {
+            Console.WriteLine("Take(int count); from InMemoryRepo");
+            if (_storage.Count < count)
+            {
+                throw new ArgumentException("Empty/NotEnoughtObjects");
+            } else
+            {
+                List<T> list = new List<T>();
+                for (int i = 1; i <= count; i++)
+                {
+                    list.Add(FindById(i));
+                }
+
+                return list;
+            }
+        }
+
+        public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        {
+            foreach (int id in ids)
+            {
+                var item = FindById(id);
+                if (item != null)
+                {
+                    yield return item;
+                }
+            }
+        }
     }
 }

@@ -14,20 +14,22 @@ namespace UamTTA
                     break;
 
                 case Duration.Monthly:
-                    endDate = AddMonth(startDate);
+                    endDate = AddMonths(startDate, 1);
                     break;
 
                 case Duration.Quarterly:
+                    endDate = AddMonths(startDate, 3);
                     break;
 
                 case Duration.Yearly:
+                    endDate = AddMonths(startDate, 12);
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            return new Budget(startDate, endDate);
+            return template.DefaultName != null ? new Budget(startDate, endDate, template.DefaultName) : new Budget(startDate, endDate);
         }
 
         private static DateTime AddWeek(DateTime startDate)
@@ -35,9 +37,9 @@ namespace UamTTA
             return startDate.AddDays(6);
         }
 
-        private static DateTime AddMonth(DateTime startDate)
+        private static DateTime AddMonths(DateTime startDate, int no)
         {
-            DateTime endDate = startDate.AddMonths(1);
+            DateTime endDate = startDate.AddMonths(no);
             int daysInStartDate = DateTime.DaysInMonth(startDate.Year, startDate.Month);
             int daysInNextMonth = DateTime.DaysInMonth(endDate.Year, endDate.Month);
             if (daysInNextMonth >= 30 && (endDate.Day < daysInNextMonth || daysInNextMonth == daysInStartDate))
